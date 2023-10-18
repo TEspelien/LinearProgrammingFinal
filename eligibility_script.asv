@@ -16,10 +16,6 @@ x3 = HA LI
 x4 = HA HI
 %}
 
-%income required to afford the median house in MA in a muni 
-% with median affordability
-inc = 739/5.2277
-
 for j = 1:n
     % determine affordability level for this municipality
     if affordability(j) > affordability_threshold
@@ -50,6 +46,10 @@ for j = 1:n
 
     % fraction of people in this muni under the state median
     lo = cdf(dist, 87);
+
+    %income required to afford the median house in MA in a muni
+    %with median affordability
+    inc = 739/5.2277
 
     %fraction of people in this muni between the state median and required
     %for a median house in a median affordability muni

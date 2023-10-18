@@ -2,20 +2,23 @@ clc; clear all; close all;
 
 Data = readtable("MA3231 final data - Sheet1.csv", "ReadVariableNames",true);
 
-income = table2array(Data(:,"medianIncome"));
-homesales = table2array(Data(:,"monthlyHomeSales"));
-saleprice = table2array(Data(:,"medianSalePrice"));
-n = length(saleprice(:,1)) - 1;
-income = income(2:n+1,1);
-homesales = homesales(2:n+1,1);
-saleprice = saleprice(2:n+1,1);
-for i = 1:n
-    affordability(i) = saleprice(i,1)/income(i,1);
-end
+n = height(Data) - 1
 
-Prog_no = eligibility_script(homesales,income,affordability);
+populations = table2array(Data(2:end, "population"));
+sum(populations)
+
+incomes = table2array(Data(2:end,"medianIncome"));
+homesales = table2array(Data(2:end,"monthlyHomeSales"));
+homeprices = table2array(Data(2:end,"medianSalePrice"));
+
+homeprices = homeprices * 0.75;
+
+homesales = homesales * 0.13;
+
+
+Prog_no = eligibility_script(homesales,homeprices, incomes);
 for i = 1:4
-    eligibility(i) = sum(Prog_no(i,:));
+    eligible(i) = sum(Prog_no(i,:));
 end
 LIweight = 80;
 Budget = 1e7;
@@ -24,7 +27,7 @@ max_budget = 0.015 * 56e9; % cap at 1.5% of total mass annual budget (about 56 b
 
 for n = 1:100
     Budget = n/100*max_budget /12; % slowly increase monthly budget up to 100% of max
-    [temp1, temp2] = programsolver(Budget, eligibility);
+    [temp1, temp2] = programsolver(Budget, eligible);
     obj(n) = temp1;
     results(:,n) = temp2(1:4);
     budj(n) = Budget;
@@ -61,4 +64,4 @@ sol = results(:, optimal_idx)
 budj(optimal_idx)
    
 
-Pertown = distribute1(saleprice,sol,Prog_no);
+Pertown = distribute1(sol, Prog_no);

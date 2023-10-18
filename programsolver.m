@@ -1,4 +1,4 @@
-function [obj, results] = programsolver(Budget, eligibility)
+function [obj, results] = programsolver(Budget, eligible)
 % config
 LA_HA_split = [60 40]; % LA at least 60%, HA at most 40% of all grants
 LI_HI_split = [80 20]; % LI at least 80%, HI at most 20% of all grants
@@ -38,7 +38,7 @@ b(1) = Budget;
 b(2) = 0;
 b(3) = 0;
 b(4) = 0;
-b(5:8) = eligibility(1:4);
+b(5:8) = eligible(1:4);
 b(9:12) = 0;
 
 results = linprog(f,A,b);
