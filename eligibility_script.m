@@ -4,7 +4,7 @@ n = length(homesales);
 
 affordability = homeprices ./ incomes
 
-affordability_threshold = prctile(affordability, 35)
+affordability_threshold = prctile(affordability, 36)
 
 Data = zeros(4,n);
 
