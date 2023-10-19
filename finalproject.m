@@ -15,6 +15,8 @@ homeprices = homeprices * 0.75;
 
 homesales = homesales * 0.13;
 
+plot(affordability)
+
 
 Prog_no = eligibility_script(homesales,homeprices, incomes);
 for i = 1:4
