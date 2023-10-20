@@ -1,7 +1,7 @@
 function [obj, results] = programsolver(Budget, eligible)
 % config
 LA_HA_split = [60 40]; % LA at least 60%, HA at most 40% of all grants
-LI_HI_split = [80 20]; % LI at least 80%, HI at most 20% of all grants
+LI_HI_split = [75 25]; % LI at least 80%, HI at most 20% of all grants
 
 ar = LA_HA_split(1)/LA_HA_split(2); %low/high ratio
 ir = LI_HI_split(1)/LI_HI_split(2);

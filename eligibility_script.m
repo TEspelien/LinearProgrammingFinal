@@ -1,10 +1,10 @@
-function [Data,n] = eligibility_script(homesales,homeprices, incomes)
+function [Data] = eligibility_script(homesales,homeprices, incomes)
 
 n = length(homesales);
 
 affordability = homeprices ./ incomes
 
-affordability_threshold = prctile(affordability, 36)
+affordability_threshold = 5.5;
 
 Data = zeros(4,n);
 

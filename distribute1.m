@@ -7,7 +7,7 @@ Dummy = ones(4,1);
 for i = 1:4
     Dummy(i) = sum(eligible(i,:));
 end
-Dummy2 = zeros(4,size(eligible,2));
+Dummy2 = zeros(4,n);
 for i = 1:n
     Dummy2(1,i) = eligible(1,i)/Dummy(1);
     Dummy2(2,i) = eligible(2,i)/Dummy(2);
